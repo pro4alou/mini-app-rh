@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+<meta charset="ISO-8859-1">
+<title> Listes Des Employes </title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+<head th:replace="fragments :: html_head"/>
+<div th:replace="fragments :: menu"></div>
+<div class="container text-center">
+	<div><h1> Liste des Employes </h1></div>
+	<div>
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Email</th>
+					<th>Salaire</th>
+					<th>Departement</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="employe : ${listEmployes}">
+				<tr>
+					<td>[[${employe.id}]]</td>
+					<td>[[${employe.nomEmp}]]</td>
+					<td>[[${employe.prenomEmp}]]</td>
+					<td>[[${employe.emailEmp}]]</td>
+					<td>[[${employe.salEmp}]]</td>
+					<td>[[${employe.departement.nomDept}]]</td>
+					<td>
+						<a th:href="@{'/employes/edit/' + ${employe.id}}"> Edit </a>
+						&nbsp;
+						<a th:href="@{'/employes/delete/' + ${employe.id}}"> Delete </a>
+					</td>
+				</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+	<div><h2> <a th:href="@{/retourAcueil}"> Retour Accueil </a> </h2></div>
+</div>
+<div th:replace="fragments :: footer"></div>
+</body>
+</html>
